@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XQXY - Animated Experience</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            background: #000;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .xqxy-title {
+            font-size: 10rem;
+            font-weight: 900;
+            color: #fff;
+            position: relative;
+            z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 0.6rem;
+            animation: wave 5s infinite;
+        }
+        @keyframes wave {
+            0% { transform: translateY(0); }
+            25% { transform: translateY(-20px); }
+            50% { transform: translateY(0); }
+            75% { transform: translateY(20px); }
+            100% { transform: translateY(0); }
+        }
+        .xqxy-title span {
+            display: inline-block;
+            animation: glow 1.5s infinite alternate;
+        }
+        .xqxy-title span:nth-child(1) { animation-delay: 0s; }
+        .xqxy-title span:nth-child(2) { animation-delay: 0.3s; }
+        .xqxy-title span:nth-child(3) { animation-delay: 0.6s; }
+        .xqxy-title span:nth-child(4) { animation-delay: 0.9s; }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #63118E, 0 0 10px #ff5a89, 0 0 15px #63118E; /* choosen by tkn */
+            }
+            100% {
+                text-shadow: 0 0 20px #63118E, 0 0 30px #ff5a89, 0 0 40px #63118E;
+            }
+        }
+
+        .animation-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #63118E, #63118E);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            z-index: 1;
+            opacity: 0.2;
+        }
+        @keyframes gradientAnimation {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="container">
+        <div class="animation-wrapper">
+            <h1 class="xqxy-title">
+                <span>X</span>
+                <span>Q</span>
+                <span>X</span>
+                <span>Y</span>
+            </h1>
+        </div>
+        <div class="animation-bg"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0"></script>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80
+                },
+                "size": {
+                    "value": 3
+                },
+                "opacity": {
+                    "value": 0.3,
+                    "random": true,
+                    "anim": {
+                        "enable": false
+                    }
+                },
+                "move": {
+                    "speed": 2
+                },
+                "line_linked": {
+                    "enable": true,
+                    "opacity": 0.2
+                },
+                "color": {
+                    "value": "#ffffff"
+                }
+            },
+            "interactivity": {
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    }
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const title = document.querySelector('.xqxy-title');
+            setInterval(() => {
+                title.classList.toggle('flash');
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

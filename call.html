@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elapsed Time Counter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1f1f1f, #3c3c3c);
+            color: #fff;
+            overflow: hidden;
+        }
+        .counter {
+            font-size: 4rem;
+            background: #2b2b2b;
+            padding: 20px 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            display: flex;
+            gap: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .label {
+            font-size: 1rem;
+            color: #999;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="counter" id="counter">
+        <div class="time-unit" id="days">
+            <div class="value">00</div>
+            <div class="label">Days</div>
+        </div>
+        <div class="time-unit" id="hours">
+            <div class="value">00</div>
+            <div class="label">Hours</div>
+        </div>
+        <div class="time-unit" id="minutes">
+            <div class="value">00</div>
+            <div class="label">Minutes</div>
+        </div>
+        <div class="time-unit" id="seconds">
+            <div class="value">00</div>
+            <div class="label">Seconds</div>
+        </div>
+    </div>
+
+    <script>
+        const startTime = new Date('2024-06-01T21:48:01').getTime();
+
+        function updateCounter() {
+            const now = new Date().getTime();
+            const elapsed = now - startTime;
+
+            const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+
+            document.getElementById('days').querySelector('.value').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').querySelector('.value').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').querySelector('.value').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').querySelector('.value').innerText = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCounter, 1000);
+        updateCounter();
+    </script>
+</body>
+</html>
